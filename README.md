@@ -1,7 +1,37 @@
 # Random Batches
 
-⚠ ATENÇÃO ⚠
+Repositório de pequenos testes e experiências feitos principalmente em Batch (`.bat`) e C++ (`.cpp`). Alguns exemplos podem executar ações invasivas ou indesejadas no sistema, por isso o conteúdo deve ser revisto antes de qualquer execução.
 
-Todos os batches foram feitos por mim, pode ter coisas "perigosas", então leia bem o que o código do .bat faz antes de simplesmente executar, tudo isso foi feito pra testar coisas.
+## ⚠️ Aviso de segurança
 
-Obs, esse repositório não tem somente batch files, tem CPP também, ou seja, precisa de algum IDE que suporte c++ pra transformar nos .exe, esses CPP são equivalentes a batches, por isso que coloquei aqui.
+- **Não executes ficheiros diretamente sem ler o código primeiro.**
+- Dá atenção especial à pasta `Pode ser perigoso/` e a executáveis já compilados.
+- Se quiseres experimentar algo desconhecido, usa uma máquina virtual ou outro ambiente isolado.
+- Evita executar estes ficheiros com privilégios de administrador sem necessidade.
+
+Este repositório existe para testes e aprendizagem; os exemplos não devem ser tratados como ferramentas prontas para produção.
+
+## Estrutura
+
+- `Nada demais/` — experiências pequenas em C++.
+- `Pode ser perigoso/` — scripts e código que merecem análise adicional antes de serem executados.
+- `Spam/` — vários exemplos em Batch e C++, incluindo um executável compilado.
+
+## Tipos de ficheiro
+
+O repositório não contém apenas Batch. Existem também fontes C++ e, em alguns casos, executáveis compilados:
+
+- `.bat` — scripts Batch para Windows.
+- `.cpp` — código-fonte C++ que precisa de ser compilado antes de executar.
+- `.exe` — binários já compilados; revê a origem e o contexto antes de os executar.
+
+## Como explorar com segurança
+
+1. Abre primeiro o ficheiro como texto e lê os comandos ou o código-fonte.
+2. Confirma que percebes quais ficheiros, processos ou definições do sistema podem ser afetados.
+3. Para C++, prefere compilar o código-fonte localmente em vez de confiar num binário pré-compilado.
+4. Testa num ambiente isolado quando não tiveres a certeza do efeito de um exemplo.
+
+## Objetivo
+
+O conteúdo foi criado como coleção de experiências e testes. Os nomes das pastas ajudam a indicar aproximadamente o nível de cuidado necessário, mas não substituem a revisão manual do código.
