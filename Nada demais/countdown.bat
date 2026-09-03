@@ -37,5 +37,4 @@ goto loop
 :done
 echo.
 echo Tempo terminado!
-echo ^G
 pause
