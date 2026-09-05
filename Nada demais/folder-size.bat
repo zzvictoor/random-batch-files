@@ -18,6 +18,8 @@ if not exist "%target%\" (
   exit /b 1
 )
 
-powershell -NoProfile -Command "$p = [IO.Path]::GetFullPath('%target%'); $s = (Get-ChildItem -LiteralPath $p -File -Recurse -Force -ErrorAction SilentlyContinue | Measure-Object Length -Sum).Sum; if ($null -eq $s) { $s = 0 }; '{0:N2} MB ({1:N0} bytes)' -f ($s / 1MB), $s"
+set "FOLDER_SIZE_TARGET=%target%"
+powershell -NoProfile -Command "$p = [IO.Path]::GetFullPath($env:FOLDER_SIZE_TARGET); $s = (Get-ChildItem -LiteralPath $p -File -Recurse -Force -ErrorAction SilentlyContinue | Measure-Object Length -Sum).Sum; if ($null -eq $s) { $s = 0 }; '{0:N2} MB ({1:N0} bytes)' -f ($s / 1MB), $s"
+set "FOLDER_SIZE_TARGET="
 
 endlocal
