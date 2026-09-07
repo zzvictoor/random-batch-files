@@ -1,5 +1,5 @@
 @echo off
-setlocal EnableExtensions EnableDelayedExpansion
+setlocal EnableExtensions
 
 title Local Password Generator
 
@@ -11,23 +11,22 @@ echo Generates a password locally using PowerShell cryptographic randomness.
 echo Nothing is sent over the network or saved to disk.
 echo.
 
-set /p LENGTH=Password length [default 20]: 
+set /p "LENGTH=Password length [default 20]: "
 if not defined LENGTH set "LENGTH=20"
 
-for /f "delims=0123456789" %%A in ("%LENGTH%") do (
+powershell -NoProfile -Command "$raw=$env:LENGTH; if ($raw -notmatch '^\d{1,3}$') { exit 2 }; $len=[int]$raw; if ($len -lt 8 -or $len -gt 128) { exit 3 }; $chars='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%%*-_=+'; $rng=[System.Security.Cryptography.RandomNumberGenerator]::Create(); try { $bytes=New-Object byte[] $len; $rng.GetBytes($bytes); -join ($bytes | ForEach-Object { $chars[$_ %% $chars.Length] }) } finally { $rng.Dispose() }"
+if errorlevel 3 (
+  echo Length must be between 8 and 128.
+  exit /b 1
+)
+if errorlevel 2 (
   echo Invalid length. Use a whole number between 8 and 128.
   exit /b 1
 )
-if %LENGTH% LSS 8 (
-  echo Length must be at least 8.
+if errorlevel 1 (
+  echo Could not generate a password.
   exit /b 1
 )
-if %LENGTH% GTR 128 (
-  echo Length must be at most 128.
-  exit /b 1
-)
-
-powershell -NoProfile -Command "$chars='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%%*-_=+'; $rng=[System.Security.Cryptography.RandomNumberGenerator]::Create(); $bytes=New-Object byte[] %LENGTH%; $rng.GetBytes($bytes); -join ($bytes ^| ForEach-Object { $chars[$_ %% $chars.Length] })"
 
 echo.
 pause
