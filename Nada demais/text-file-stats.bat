@@ -27,8 +27,7 @@ if not exist "%FILE%" (
 )
 
 echo.
-powershell -NoProfile -Command "$p=$env:FILE; try { $c=Get-Content -LiteralPath $p -Raw -ErrorAction Stop; $lines=if($c.Length -eq 0){0}else{($c -split '?
-').Count}; $words=([regex]::Matches($c,'S+')).Count; $chars=$c.Length; Write-Host ('Lines      : ' + $lines); Write-Host ('Words      : ' + $words); Write-Host ('Characters : ' + $chars); Write-Host ('Bytes      : ' + (Get-Item -LiteralPath $p).Length) } catch { Write-Host ('Could not read file: ' + $_.Exception.Message); exit 1 }"
+powershell -NoProfile -Command "$p=$env:FILE; try { $m=Get-Content -LiteralPath $p -ErrorAction Stop | Measure-Object -Line -Word -Character; $bytes=(Get-Item -LiteralPath $p -ErrorAction Stop).Length; Write-Host ('Lines      : ' + $m.Lines); Write-Host ('Words      : ' + $m.Words); Write-Host ('Characters : ' + $m.Characters); Write-Host ('Bytes      : ' + $bytes) } catch { Write-Host ('Could not read file: ' + $_.Exception.Message); exit 1 }"
 
 echo.
 pause
